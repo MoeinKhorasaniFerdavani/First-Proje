@@ -12,7 +12,7 @@ template <typename T>
 class Node
 {
     T data;
-    T* prev, * next;
+    Node<T> * prev, * next;
 public:
     Node(const T& data)
         :prev(nullptr),next(nullptr)
@@ -27,12 +27,12 @@ public:
     }
 
     void setData(const T& data) { this->data = data; }
-    void setPrev(T* ptr) { this->prev = ptr; }
-    void setNext(T* ptr) { this->next = ptr; }
+    void setPrev(Node<T>* ptr) { this->prev = ptr; }
+    void setNext(Node<T>* ptr) { this->next = ptr; }
 
     T  getData()const { return this->data; }
-    T* getPrev()const { return this->prev; }
-    T* getNext()const { return this->next; }
+    Node<T>* getPrev()const { return this->prev; }
+    Node<T>* getNext()const { return this->next; }
 
     T operator= (const T& data)
     {
