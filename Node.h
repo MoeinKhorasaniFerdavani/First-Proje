@@ -30,7 +30,7 @@ public:
     void setPrev(Node<T>* ptr) { this->prev = ptr; }
     void setNext(Node<T>* ptr) { this->next = ptr; }
 
-    T  getData()const { return this->data; }
+    T  getData()const  { return this->data; }
     Node<T>* getPrev()const { return this->prev; }
     Node<T>* getNext()const { return this->next; }
 
