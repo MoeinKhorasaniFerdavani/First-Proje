@@ -10,6 +10,10 @@ void Date:: setYear(int year)
         this->year=year;
         return;
     }
+    else if(year>100 && year<200)
+       {
+         this->year=year+1900;
+        }
     else
     {
         this->year=year;
@@ -59,21 +63,98 @@ Date::Date(int year,int month,int day,int hour,int minute)
 
 void Date:: goToCurrentDate()
 {
-    this->year=localtime(& now)->tm_year;
-     this->month=localtime(& now)->tm_mon;
-     this->day=localtime(& now)->tm_mday;
-     this->hour=localtime(& now)->tm_hour;
-     this->minute=localtime(& now)->tm_min;
+   this->setYear(localtime(& now)->tm_year);
+    this->setMonth(localtime(& now)->tm_mon);
+    this->setDay(localtime(& now)->tm_mday);
+    this->setHour(localtime(& now)->tm_hour);
+    this->setMinute(localtime(& now)->tm_min);
+
+
 
 }
 
-const char* Date:: toString()
+QString Date:: toString()
 {
-    char date [100];
-    sprintf(date,"date:\t%d/%d/%d\ttime:\t%d/%d",this->year,this->month,this->day,  this->hour,this->minute);
 
-    return date;
+
+    char date[40];
+    QString res;
+    sprintf(date,"date:\t%d/%d/%d\ttime:\t%d:%d",year,month,day,    hour,minute);
+    res=date;
+    return res;
+
 
 }
 
+Date Date:: operator= (const Date& rvalue)
+{
+    this->year=rvalue.year;
+    this->month=rvalue.month;
+    this->day=rvalue.day;
+    this->hour=rvalue.hour;
+    this->minute=rvalue.minute;
+
+    return rvalue;
+
+}
+
+
+bool Date:: operator==(const Date &rvalue)const
+{
+    if(this->year==rvalue.year && this->month==rvalue.month && this->day==rvalue.day && this->hour==rvalue.hour && this->minute==rvalue.minute)
+        return true;
+    else
+        return false;
+}
+
+bool Date:: operator!=(const Date &rvalue)const
+{
+    return !(*this == rvalue);
+}
+
+
+ bool Date:: isBeforThan(const Date& rvalue)const
+ {
+     if(this->year<rvalue.year)
+         return true;
+     else if(this->year>rvalue.year)
+         return false;
+     else
+     {
+         if(this->month<rvalue.month)
+             return true;
+         else if(this->month>rvalue.month)
+             return false;
+         else
+         {
+             if(this->day<rvalue.day)
+                 return true;
+             else if(this->day>rvalue.day)
+                 return false;
+             else
+             {
+                 if(this->hour<rvalue.hour)
+                     return true;
+                 else if(this->hour>rvalue.hour)
+                     return false;
+                 else
+                 {
+                     if(this->minute<rvalue.minute)
+                         return true;
+                     else if(this->minute>rvalue.minute)
+                         return false;
+                     else
+                         return false;
+                 }
+             }
+         }
+     }
+
+
+ }
+
+  bool Date:: isAfterThan(const Date& rvalue)const
+  {
+      return rvalue.isBeforThan(*this);
+  }
 

@@ -1,6 +1,8 @@
 #ifndef DATE_H
 #define DATE_H
 
+#include <QString>
+
 #include <time.h>
 #include <iostream>
 #include <string>
@@ -15,7 +17,7 @@ class Date
     int day=1;
     int hour=0;
     int minute=0;
-   time_t now=0;
+   time_t now=time(NULL);
 public:
 
 
@@ -37,8 +39,18 @@ public:
      void goToCurrentDate();
 
 
-   const char* toString();
+   QString toString();
 
+    Date operator= (const Date& rvalue);
+    bool operator== (const Date& rvalue)const;
+    bool operator!= (const Date& rvalue)const;
+    bool isBeforThan(const Date& rvalue)const;
+    bool isAfterThan(const Date& rvalue)const;
+
+    bool operator> (const Date& rvalue)const{return this->isAfterThan(rvalue);}
+      bool operator< (const Date& rvalue)const{return this->isBeforThan(rvalue);}
+      bool operator>= (const Date& rvalue)const{return (*this>rvalue || *this==rvalue);}
+        bool operator<= (const Date& rvalue)const{return (*this<rvalue || *this==rvalue);}
 
 
 };
