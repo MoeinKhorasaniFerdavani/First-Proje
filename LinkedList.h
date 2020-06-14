@@ -8,8 +8,8 @@
 template <typename T>
 class LinkedList
 {
-    Node<T>* head;
-    Node<T>* tail;
+    Node<T>* head=nullptr;
+    Node<T>* tail=nullptr;
 
 public:
 

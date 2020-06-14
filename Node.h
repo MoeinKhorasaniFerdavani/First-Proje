@@ -12,7 +12,7 @@ template <typename T>
 class Node
 {
     T data;
-    Node<T> * prev, * next;
+    Node<T> * prev=nullptr, * next=nullptr;
 public:
     Node(const T& data)
         :prev(nullptr),next(nullptr)
